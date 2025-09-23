@@ -5,7 +5,7 @@ import './CircularGallery.css';
 
 function debounce(func: Function, wait: number) {
   let timeout: NodeJS.Timeout;
-  return function (...args: any[]) {
+  return function (this: any, ...args: any[]) {
     clearTimeout(timeout);
     timeout = setTimeout(() => func.apply(this, args), wait);
   };
@@ -327,8 +327,8 @@ class App {
   screen: any;
   viewport: any;
   planeGeometry: any;
-  mediasImages: any[];
-  medias: Media[];
+  mediasImages: any[] = [];
+  medias: Media[] = [];
   isDown: boolean = false;
   start: number = 0;
   raf: number = 0;

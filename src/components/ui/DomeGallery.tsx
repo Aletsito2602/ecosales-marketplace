@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useCallback } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useGesture } from '@use-gesture/react';
 import './DomeGallery.css';
 
@@ -41,7 +41,7 @@ const DEFAULTS = {
 };
 
 const clamp = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max);
-const normalizeAngle = (d: number) => ((d % 360) + 360) % 360;
+// const normalizeAngle = (d: number) => ((d % 360) + 360) % 360;
 const wrapAngleSigned = (deg: number) => {
   const a = (((deg + 180) % 360) + 360) % 360;
   return a - 180;
@@ -113,18 +113,10 @@ interface DomeGalleryProps {
 export default function DomeGallery({
   images = DEFAULT_IMAGES,
   fit = 0.5,
-  fitBasis = 'auto',
-  minRadius = 600,
-  maxRadius = Infinity,
-  padFactor = 0.25,
   overlayBlurColor = '#060010',
   maxVerticalRotationDeg = DEFAULTS.maxVerticalRotationDeg,
   dragSensitivity = DEFAULTS.dragSensitivity,
-  enlargeTransitionMs = DEFAULTS.enlargeTransitionMs,
   segments = DEFAULTS.segments,
-  dragDampening = 2,
-  openedImageWidth = '250px',
-  openedImageHeight = '350px',
   imageBorderRadius = '30px',
   openedImageBorderRadius = '30px',
   grayscale = true
@@ -135,11 +127,8 @@ export default function DomeGallery({
   const frameRef = useRef<HTMLDivElement>(null);
   const viewerRef = useRef<HTMLDivElement>(null);
   const scrimRef = useRef<HTMLDivElement>(null);
-  const focusedElRef = useRef<HTMLDivElement | null>(null);
-
   const rotationRef = useRef({ x: 0, y: 0 });
   const draggingRef = useRef(false);
-  const inertiaRAF = useRef<number | null>(null);
 
   const items = useMemo(() => buildItems(images, segments), [images, segments]);
 
