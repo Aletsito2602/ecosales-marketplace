@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useCartStore } from '../store/cartStore';
+import { useScrollToTop } from '../hooks/useScrollToTop';
 
 const CartPage = () => {
+  // Scroll to top on page load
+  useScrollToTop();
+  
   const { items, removeItem, updateQuantity, clearCart, getTotalPrice } = useCartStore();
   
   if (items.length === 0) {
@@ -11,7 +15,7 @@ const CartPage = () => {
         <p className="text-gray-600 dark:text-gray-300 mb-8">Your cart is empty.</p>
         <Link
           to="/products"
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+          className="bg-coffee-500 text-white px-6 py-3 rounded-lg hover:bg-coffee-600 transition-colors"
         >
           Continue Shopping
         </Link>
@@ -50,7 +54,7 @@ const CartPage = () => {
                       <div className="ml-4">
                         <Link 
                           to={`/products/${item.product.id}`}
-                          className="text-sm font-medium text-gray-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-400"
+                          className="text-sm font-medium text-gray-800 dark:text-white hover:text-coffee-500 dark:hover:text-coffee-300"
                         >
                           {item.product.name}
                         </Link>
@@ -133,7 +137,7 @@ const CartPage = () => {
             </Link>
             <Link
               to="/checkout"
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+              className="bg-coffee-500 text-white px-6 py-3 rounded-lg hover:bg-coffee-600 transition-colors"
             >
               Checkout
             </Link>

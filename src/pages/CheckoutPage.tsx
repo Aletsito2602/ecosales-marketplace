@@ -242,7 +242,7 @@ const CheckoutPage = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-70"
+                className="bg-coffee-500 text-white px-6 py-3 rounded-lg hover:bg-coffee-600 transition-colors disabled:opacity-70"
               >
                 {isSubmitting ? 'Processing...' : 'Place Order'}
               </button>

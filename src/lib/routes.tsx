@@ -5,6 +5,8 @@ import ProductsPage from '../pages/ProductsPage';
 import ProductDetailPage from '../pages/ProductDetailPage';
 import CartPage from '../pages/CartPage';
 import CheckoutPage from '../pages/CheckoutPage';
+import BrewingPage from '../pages/BrewingPage';
+import AboutPage from '../pages/AboutPage';
 import NotFoundPage from '../pages/NotFoundPage';
 
 export const router = createBrowserRouter([
@@ -32,6 +34,14 @@ export const router = createBrowserRouter([
       {
         path: 'checkout',
         element: <CheckoutPage />,
+      },
+      {
+        path: 'brewing',
+        element: <BrewingPage />,
+      },
+      {
+        path: 'about',
+        element: <AboutPage />,
       },
     ],
   },

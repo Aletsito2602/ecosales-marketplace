@@ -1,102 +1,61 @@
-import { Link } from 'react-router-dom';
-import { FaCoffee, FaInstagram, FaFacebook, FaTwitter, FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa';
-
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
-  
   return (
-    <footer className="bg-espresso-950 text-cream-100 py-12">
+    <footer className="bg-coffee-800 text-white py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <FaCoffee className="text-coffee-400 text-2xl" />
-              <h3 className="font-serif text-xl font-bold text-cream-200">Kaapeh</h3>
-            </div>
-            <p className="text-cream-300 mb-6">
-              Café de especialidad seleccionado a mano, tostado con pasión y entregado fresco a tu puerta.
+        {/* Main Content */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          {/* About Section */}
+          <div className="text-center md:text-left">
+            <p className="text-lg mb-2 font-semibold">
+              Tostamos Café de Especialidad desde 2016
             </p>
-            <div className="flex space-x-4">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-cream-400 hover:text-coffee-400 transition-colors">
-                <FaInstagram className="text-xl" />
-              </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-cream-400 hover:text-coffee-400 transition-colors">
-                <FaFacebook className="text-xl" />
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-cream-400 hover:text-coffee-400 transition-colors">
-                <FaTwitter className="text-xl" />
-              </a>
+            <p className="text-base text-gray-200">
+              por Luciano Cuello
+            </p>
+          </div>
+
+          {/* Contact Section */}
+          <div className="text-center md:text-left">
+            <h3 className="text-lg font-bold mb-3 text-turquoise-300">Contacto</h3>
+            <div className="space-y-2 text-gray-200">
+              <p className="hover:text-white transition-colors">
+                <a href="tel:+5493512738370">+54 9 351 273-8370</a>
+              </p>
+              <p className="hover:text-white transition-colors">
+                <a href="https://instagram.com/kaapeh.cordoba" target="_blank" rel="noopener noreferrer">
+                  @kaapeh.cordoba
+                </a>
+              </p>
             </div>
           </div>
-          
-          <div>
-            <h3 className="font-serif text-lg font-semibold text-cream-200 mb-4">Enlaces Rápidos</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/" className="text-cream-300 hover:text-coffee-400 transition-colors">
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link to="/products" className="text-cream-300 hover:text-coffee-400 transition-colors">
-                  Cafés
-                </Link>
-              </li>
-              <li>
-                <Link to="/brewing" className="text-cream-300 hover:text-coffee-400 transition-colors">
-                  Métodos de Preparación
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="text-cream-300 hover:text-coffee-400 transition-colors">
-                  Nosotros
-                </Link>
-              </li>
-              <li>
-                <Link to="/cart" className="text-cream-300 hover:text-coffee-400 transition-colors">
-                  Carrito
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="font-serif text-lg font-semibold text-cream-200 mb-4">Contáctanos</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start space-x-3">
-                <FaEnvelope className="text-coffee-400 mt-1" />
-                <span className="text-cream-300">info@kaapeh.com</span>
-              </li>
-              <li className="flex items-start space-x-3">
-                <FaPhone className="text-coffee-400 mt-1" />
-                <span className="text-cream-300">+54 (11) 5555-1234</span>
-              </li>
-              <li className="flex items-start space-x-3">
-                <FaMapMarkerAlt className="text-coffee-400 mt-1" />
-                <span className="text-cream-300">Av. del Café 1234, Buenos Aires</span>
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="font-serif text-lg font-semibold text-cream-200 mb-4">Horario</h3>
-            <ul className="space-y-2">
-              <li className="text-cream-300">
-                <span className="font-medium">Lunes a Viernes:</span> 8:00 - 20:00
-              </li>
-              <li className="text-cream-300">
-                <span className="font-medium">Sábados:</span> 9:00 - 21:00
-              </li>
-              <li className="text-cream-300">
-                <span className="font-medium">Domingos:</span> 10:00 - 18:00
-              </li>
-            </ul>
+
+          {/* Location Section */}
+          <div className="text-center md:text-left">
+            <h3 className="text-lg font-bold mb-3 text-turquoise-300">Ubicación</h3>
+            <p className="text-gray-200 mb-2">Encontranos en Córdoba Capital en:</p>
+            <div className="space-y-1 text-sm text-gray-200">
+              <p className="hover:text-white transition-colors">
+                Belgrano 647, Barrio Güemes
+              </p>
+              <p className="hover:text-white transition-colors">
+                José Baigorri 608, Barrio Alta Córdoba
+              </p>
+            </div>
           </div>
         </div>
-        
-        <div className="border-t border-espresso-800 mt-10 pt-8 text-center">
-          <p className="text-cream-400">
-            &copy; {currentYear} Kaapeh Café de Especialidad. Todos los derechos reservados.
+
+        {/* Bottom Section */}
+        <div className="border-t border-coffee-700 pt-6 text-center">
+          <p className="text-sm text-gray-300">
+            Desarrollado por{' '}
+            <a 
+              href="https://soybourbon.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-turquoise-400 hover:text-turquoise-300 underline transition-colors"
+            >
+              Bourbon
+            </a>
           </p>
         </div>
       </div>

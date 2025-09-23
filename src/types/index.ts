@@ -5,6 +5,13 @@ export interface Product {
   image: string;
   description: string;
   category: string;
+  tastingNotes?: {
+    aroma: string[];
+    flavor: string[];
+    body: string;
+    acidity: string;
+    finish: string;
+  };
 }
 
 export interface CartItem {

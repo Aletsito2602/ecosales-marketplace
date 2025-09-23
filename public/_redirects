@@ -1,0 +1,19 @@
+# Netlify redirects file for Kaapeh Coffee E-commerce
+
+# Product redirects - old URLs to new URLs
+/producto/:id /products/:id 301
+/cafe/:id /products/:id 301
+
+# Category redirects
+/categoria/origen /products?category=origen 301
+/categoria/blends /products?category=blends 301
+/categoria/especiales /products?category=especiales 301
+
+# Page redirects
+/acerca /about 301
+/contacto /about 301
+/metodos-preparacion /brewing 301
+/carrito /cart 301
+
+# Catch-all for SPA routing
+/* /index.html 200

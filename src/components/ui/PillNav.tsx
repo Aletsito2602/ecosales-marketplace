@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import type { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { FaCoffee } from 'react-icons/fa';
@@ -31,9 +32,9 @@ const PillNav = ({
   activeHref,
   className = '',
   ease = 'power3.easeOut',
-  baseColor = '#bb8251', // Color café principal
-  pillColor = '#fefbf7', // Color crema
-  hoveredPillTextColor = '#fefbf7',
+  baseColor = '#00afac', // Primary brand color
+  pillColor = '#ffffff',
+  hoveredPillTextColor = '#ffffff',
   pillTextColor,
   onMobileMenuClick,
   initialLoadAnimation = true
@@ -226,22 +227,12 @@ const PillNav = ({
     onMobileMenuClick?.();
   };
 
-  const isExternalLink = (href: string) =>
-    href.startsWith('http://') ||
-    href.startsWith('https://') ||
-    href.startsWith('//') ||
-    href.startsWith('mailto:') ||
-    href.startsWith('tel:') ||
-    href.startsWith('#');
-
-  const isRouterLink = (href: string) => href && !isExternalLink(href);
-
   const cssVars = {
     ['--base']: baseColor,
     ['--pill-bg']: pillColor,
     ['--hover-text']: hoveredPillTextColor,
     ['--pill-text']: resolvedPillTextColor
-  };
+  } as CSSProperties;
 
   return (
     <div className="pill-nav-container">
@@ -305,7 +296,7 @@ const PillNav = ({
 
       <div className="mobile-menu-popover mobile-only" ref={mobileMenuRef} style={cssVars}>
         <ul className="mobile-menu-list">
-          {items.map((item, i) => (
+          {items.map(item => (
             <li key={item.href}>
               <Link
                 to={item.href}

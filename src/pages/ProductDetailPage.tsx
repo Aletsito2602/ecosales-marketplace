@@ -1,107 +1,194 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { PRODUCTS } from '../lib/data';
-import { useCartStore } from '../store/cartStore';
+import { useScrollToTop } from '../hooks/useScrollToTop';
+import { openWhatsApp } from '../lib/whatsapp';
+import PageBanner from '../components/ui/PageBanner';
+import { formatARS } from '../lib/currency';
 
 const ProductDetailPage = () => {
+  // Scroll to top on page load
+  useScrollToTop();
+  
   const { productId } = useParams<{ productId: string }>();
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
-  const addToCart = useCartStore((state) => state.addItem);
   
   const product = PRODUCTS.find(p => p.id === productId);
   
   if (!product) {
     return (
-      <div className="text-center py-12">
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Product Not Found</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-6">The product you're looking for doesn't exist or has been removed.</p>
-        <button
-          onClick={() => navigate('/products')}
-          className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition-colors"
-        >
-          Back to Products
-        </button>
+      <div className="space-y-10">
+        <PageBanner
+          title="No encontramos ese café"
+          description="Puede que el enlace haya cambiado o el producto haya sido dado de baja."
+          backgroundImage="https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=1600"
+          cta={{ label: 'Volver al catálogo', to: '/products' }}
+        />
+        <div className="text-center py-12">
+          <p className="text-gray-600 dark:text-gray-300 mb-6">Probá navegar el catálogo para descubrir otros perfiles Kaapeh.</p>
+          <button
+            onClick={() => navigate('/products')}
+            className="bg-coffee-500 text-white px-6 py-2 rounded hover:bg-coffee-600 transition-colors"
+          >
+            Ir al catálogo
+          </button>
+        </div>
       </div>
     );
   }
   
-  const handleAddToCart = () => {
-    addToCart(product, quantity);
-    navigate('/cart');
+  const handleBuyWhatsApp = () => {
+    openWhatsApp(product, quantity);
   };
   
   return (
-    <div className="max-w-6xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Product Image */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow">
-          <img 
-            src={product.image} 
-            alt={product.name} 
-            className="w-full h-auto object-cover"
-          />
-        </div>
-        
-        {/* Product Details */}
-        <div className="space-y-6">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">{product.name}</h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Category: {product.category}</p>
-          </div>
-          
-          <div className="text-2xl font-bold text-gray-800 dark:text-white">
-            ${product.price.toFixed(2)}
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">Description</h3>
-            <p className="text-gray-600 dark:text-gray-300">{product.description}</p>
-          </div>
-          
-          <div className="flex items-center space-x-4">
-            <label htmlFor="quantity" className="text-gray-700 dark:text-gray-300">Quantity:</label>
-            <div className="flex items-center">
-              <button
-                onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
-                className="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-l"
-              >
-                -
-              </button>
-              <input
-                type="number"
-                id="quantity"
-                min="1"
-                value={quantity}
-                onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                className="w-16 text-center border-y border-gray-300 dark:border-gray-600 py-1 bg-white dark:bg-gray-800 text-gray-800 dark:text-white"
-              />
-              <button
-                onClick={() => setQuantity(prev => prev + 1)}
-                className="bg-gray-200 dark:bg-gray-700 px-3 py-1 rounded-r"
-              >
-                +
-              </button>
-            </div>
-          </div>
-          
-          <div className="flex space-x-4">
-            <button
-              onClick={handleAddToCart}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex-1"
+    <>
+      <div className="w-full space-y-16 pb-24">
+        <PageBanner
+          title={product.name}
+          description={product.description}
+          backgroundImage={product.image}
+          align="left"
+        />
+
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+            {/* Product Image */}
+            <motion.div 
+              className="space-y-6"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              Add to Cart
-            </button>
-            <button
-              onClick={() => navigate('/products')}
-              className="bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-white px-6 py-3 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+              <div className="bg-white rounded-2xl overflow-hidden shadow-xl border border-gray-100">
+                <img 
+                  src={product.image} 
+                  alt={product.name} 
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </motion.div>
+            
+            {/* Product Details */}
+            <motion.div 
+              className="space-y-8"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Back to Products
-            </button>
+              {/* Header */}
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <span className="bg-turquoise-100 text-turquoise-800 px-3 py-1 rounded-full text-sm font-medium">
+                    {product.category}
+                  </span>
+                </div>
+                <h1 className="text-4xl md:text-5xl font-serif font-bold text-coffee-800">{product.name}</h1>
+                <div className="text-3xl font-bold text-coffee-600">{formatARS(product.price)}</div>
+              </div>
+
+              {/* Description */}
+              <div className="bg-neutral-50 rounded-xl p-6 border border-gray-100">
+                <h3 className="text-xl font-bold text-coffee-800 mb-4">Descripción</h3>
+                <p className="text-coffee-700 leading-relaxed text-lg">{product.description}</p>
+              </div>
+
+              {/* Tasting Notes */}
+              {product.tastingNotes && (
+                <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
+                  <h3 className="text-xl font-bold text-coffee-800 mb-6">Notas de Cata</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="font-semibold text-coffee-700 mb-2">Aroma</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {product.tastingNotes.aroma.map((note, index) => (
+                          <span key={index} className="bg-coffee-100 text-coffee-700 px-3 py-1 rounded-full text-sm">
+                            {note}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-coffee-700 mb-2">Sabor</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {product.tastingNotes.flavor.map((note, index) => (
+                          <span key={index} className="bg-turquoise-100 text-turquoise-700 px-3 py-1 rounded-full text-sm">
+                            {note}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-coffee-700 mb-2">Cuerpo</h4>
+                      <p className="text-coffee-600">{product.tastingNotes.body}</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-coffee-700 mb-2">Acidez</h4>
+                      <p className="text-coffee-600">{product.tastingNotes.acidity}</p>
+                    </div>
+                    <div className="md:col-span-2">
+                      <h4 className="font-semibold text-coffee-700 mb-2">Final</h4>
+                      <p className="text-coffee-600">{product.tastingNotes.finish}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Quantity Selector */}
+              <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
+                <h3 className="text-lg font-semibold text-coffee-800 mb-4">Cantidad</h3>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+                    <button
+                      onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
+                      className="bg-gray-100 hover:bg-gray-200 px-4 py-3 text-coffee-700 font-semibold transition-colors"
+                    >
+                      -
+                    </button>
+                    <input
+                      type="number"
+                      min="1"
+                      value={quantity}
+                      onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+                      className="w-20 text-center py-3 border-0 focus:ring-0 text-coffee-800 font-semibold"
+                    />
+                    <button
+                      onClick={() => setQuantity(prev => prev + 1)}
+                      className="bg-gray-100 hover:bg-gray-200 px-4 py-3 text-coffee-700 font-semibold transition-colors"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <div className="text-lg font-semibold text-coffee-800">
+                    Total: {formatARS(product.price * quantity)}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
-    </div>
+
+      {/* Floating Buy Button */}
+      <div className="fixed bottom-6 left-6 right-6 z-50 max-w-md mx-auto">
+        <motion.button
+          onClick={handleBuyWhatsApp}
+          className="w-full bg-turquoise-500 hover:bg-turquoise-600 backdrop-blur-sm text-white font-bold py-4 px-6 rounded-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 border border-turquoise-400/50"
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <div className="flex items-center justify-between">
+            <span className="text-lg">Comprar por WhatsApp</span>
+            <span className="text-lg font-bold">{formatARS(product.price * quantity)}</span>
+          </div>
+        </motion.button>
+      </div>
+    </>
   );
 };
 

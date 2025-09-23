@@ -7,32 +7,49 @@ export default {
   theme: {
     extend: {
       colors: {
-        coffee: {
-          50: '#f9f5f0',
-          100: '#f1e6d8',
-          200: '#e6d0b8',
-          300: '#d9b795',
-          400: '#c99c70',
-          500: '#bb8251', // Main coffee color
-          600: '#a06b45',
-          700: '#85563c',
-          800: '#6b4632',
-          900: '#5a3a2b',
-          950: '#2c1c14',
+        // Primary brand color (turquoise)
+        primary: {
+          50: '#e6fffe',
+          100: '#b8fffa', 
+          200: '#80fcf4',
+          300: '#4ae9e1',
+          400: '#1cd0c8',
+          500: '#00afac', // Main brand color
+          600: '#009a97',
+          700: '#008582',
+          800: '#006c6a',
+          900: '#004f4d',
+          950: '#003f3d',
         },
-        cream: {
-          50: '#fefbf7',
-          100: '#fdf7ee',
-          200: '#f8ebd6',
-          300: '#f3dbb7',
-          400: '#eac288',
-          500: '#e0a65a', // Main cream color
-          600: '#d28a37',
-          700: '#b06e2a',
-          800: '#8f5825',
-          900: '#754a22',
-          950: '#432711',
+        // Secondary accent color (warm yellow)
+        accent: {
+          50: '#fffef7',
+          100: '#fffce6',
+          200: '#fff7b8',
+          300: '#fff181',
+          400: '#fbe85b',
+          500: '#f4d03f', // Warmer, more coffee-like yellow
+          600: '#d4ac0d',
+          700: '#b7950b',
+          800: '#9a7d0a',
+          900: '#7d6608',
+          950: '#5d4e06',
         },
+        // Coffee bean colors (rich browns)
+        bean: {
+          50: '#faf8f7',
+          100: '#f2ede9',
+          200: '#e6d7cf',
+          300: '#d4bfb0',
+          400: '#c0a08a',
+          500: '#a67c52', // Rich coffee bean brown
+          600: '#8b5a3c',
+          700: '#6f4518',
+          800: '#5d3914',
+          900: '#4a2c0f',
+          950: '#2d1a09',
+        },
+        // Espresso colors (dark browns)
         espresso: {
           50: '#f8f7f7',
           100: '#e9e6e4',
@@ -44,12 +61,53 @@ export default {
           700: '#5e4941',
           800: '#4d3c36',
           900: '#3d302c',
-          950: '#231b18', // Main dark color
+          950: '#231b18', // Deep espresso
+        },
+        // Warm neutrals
+        warm: {
+          50: '#fafaf9',
+          100: '#f5f5f4',
+          200: '#e7e5e4',
+          300: '#d6d3d1',
+          400: '#a8a29e',
+          500: '#78716c',
+          600: '#57534e',
+          700: '#44403c',
+          800: '#292524',
+          900: '#1c1917',
+          950: '#0c0a09',
+        },
+        // Legacy support (will be deprecated)
+        coffee: {
+          50: '#e6fffe',
+          100: '#b8fffa',
+          200: '#80fcf4',
+          300: '#4ae9e1',
+          400: '#1cd0c8',
+          500: '#00afac',
+          600: '#009a97',
+          700: '#008582',
+          800: '#006c6a',
+          900: '#004f4d',
+          950: '#003f3d',
+        },
+        cream: {
+          50: '#fffef7',
+          100: '#fffce6',
+          200: '#fff7b8',
+          300: '#fff181',
+          400: '#fbe85b',
+          500: '#f4d03f',
+          600: '#d4ac0d',
+          700: '#b7950b',
+          800: '#9a7d0a',
+          900: '#7d6608',
+          950: '#5d4e06',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        serif: ['Playfair Display', 'Georgia', 'serif'],
+        sans: ['Poppins', 'system-ui', 'sans-serif'],
+        serif: ['Poppins', 'Georgia', 'serif'],
       },
       backgroundImage: {
         'coffee-pattern': "url('/src/assets/images/coffee-pattern.png')",

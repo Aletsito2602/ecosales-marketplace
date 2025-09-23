@@ -1,85 +1,174 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FaSearch, FaSortAmountDown } from 'react-icons/fa';
 import { PRODUCTS } from '../lib/data';
-import { useCartStore } from '../store/cartStore';
+import { useScrollToTop } from '../hooks/useScrollToTop';
+import PageBanner from '../components/ui/PageBanner';
+import { formatARS } from '../lib/currency';
 
 const ProductsPage = () => {
+  // Scroll to top on page load
+  useScrollToTop();
+  
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const addToCart = useCartStore((state) => state.addItem);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortOption, setSortOption] = useState<'featured' | 'price-asc' | 'price-desc'>('featured');
   
   const categories = Array.from(new Set(PRODUCTS.map(product => product.category)));
   
-  const filteredProducts = selectedCategory
-    ? PRODUCTS.filter(product => product.category === selectedCategory)
-    : PRODUCTS;
+  const filteredProducts = useMemo(() => {
+    const byCategory = selectedCategory
+      ? PRODUCTS.filter(product => product.category === selectedCategory)
+      : PRODUCTS;
+
+    const bySearch = searchTerm.trim().length > 0
+      ? byCategory.filter(product =>
+          product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.description.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      : byCategory;
+
+    const sorted = [...bySearch];
+
+    if (sortOption === 'price-asc') {
+      sorted.sort((a, b) => a.price - b.price);
+    } else if (sortOption === 'price-desc') {
+      sorted.sort((a, b) => b.price - a.price);
+    } else {
+      sorted.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    return sorted;
+  }, [selectedCategory, searchTerm, sortOption]);
+
+  const resultCount = filteredProducts.length;
     
   return (
-    <div className="space-y-8">
-      <h1 className="text-3xl font-bold text-gray-800 dark:text-white">All Products</h1>
-      
-      {/* Category Filter */}
-      <div className="flex flex-wrap gap-2">
-        <button
-          onClick={() => setSelectedCategory(null)}
-          className={`px-4 py-2 rounded-full text-sm font-medium ${
-            selectedCategory === null
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200'
-          }`}
-        >
-          All
-        </button>
-        
-        {categories.map(category => (
+    <div className="w-full space-y-12">
+      <PageBanner
+        title="Catálogo Kaapeh"
+        description="Cada cuarto de kilo se tuesta bajo pedido para que disfrutes el perfil más fresco de nuestros cafés de especialidad."
+        backgroundImage="https://zsucsanecavdmpnpatct.supabase.co/storage/v1/object/sign/e-commerces/kaapeh/27.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV83YTVkNTQ5Yi1jNjE5LTQxNzgtYjFiNy1jY2FkMjBlMTlhOTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJlLWNvbW1lcmNlcy9rYWFwZWgvMjcuanBnIiwiaWF0IjoxNzU4MzE3NDg1LCJleHAiOjE3ODk4NTM0ODV9.Ax1trhQJEQUx-_a7aGfySRRolLd_FfbKLEMYG2biuxY"
+        cta={{ label: 'Explorar Métodos', to: '/brewing' }}
+      />
+
+      <div className="w-full space-y-10 px-6 md:px-12 pb-16">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="space-y-2 max-w-2xl">
+            <h1 className="text-3xl font-bold text-gray-900">Todos los Productos</h1>
+            <p className="text-gray-600 text-sm md:text-base">
+              Filtrá por categoría, buscá tu perfil favorito o descubrí nuevas ediciones. Encontramos {resultCount} cafés listos para vos.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div className="relative w-full sm:w-64">
+              <FaSearch className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400" />
+              <input
+                type="search"
+                placeholder="Buscar por nombre o notas de cata"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+                className="w-full rounded-full border border-gray-200 bg-white px-10 py-2 text-sm text-gray-800 shadow-sm focus:border-coffee-400 focus:outline-none focus:ring-2 focus:ring-coffee-300"
+              />
+            </div>
+
+            <label className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm">
+              <FaSortAmountDown className="text-coffee-500" />
+              <span className="hidden sm:inline text-gray-600">Ordenar</span>
+              <select
+                value={sortOption}
+                onChange={(event) => setSortOption(event.target.value as typeof sortOption)}
+                className="bg-transparent text-gray-700 focus:outline-none"
+              >
+                <option value="featured">Destacados</option>
+                <option value="price-asc">Precio: menor a mayor</option>
+                <option value="price-desc">Precio: mayor a menor</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-3">
           <button
-            key={category}
-            onClick={() => setSelectedCategory(category)}
-            className={`px-4 py-2 rounded-full text-sm font-medium ${
-              selectedCategory === category
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200'
+            onClick={() => setSelectedCategory(null)}
+            className={`rounded-full border px-4 py-2 text-sm font-medium transition-all ${
+              selectedCategory === null
+                ? 'bg-coffee-500 text-white shadow-lg shadow-coffee-500/30'
+                : 'border-gray-200 bg-white text-gray-600 hover:border-coffee-200 hover:text-gray-900'
             }`}
           >
-            {category}
+            Todas
           </button>
-        ))}
-      </div>
-      
-      {/* Products Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {filteredProducts.map((product) => (
-          <div key={product.id} className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
-            <Link to={`/products/${product.id}`}>
-              <img 
-                src={product.image} 
-                alt={product.name} 
-                className="w-full h-64 object-cover"
-              />
-            </Link>
-            <div className="p-4">
-              <Link to={`/products/${product.id}`}>
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">{product.name}</h3>
-              </Link>
-              <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">{product.description}</p>
-              <div className="flex justify-between items-center">
-                <span className="text-lg font-bold text-gray-800 dark:text-white">${product.price.toFixed(2)}</span>
-                <button
-                  onClick={() => addToCart(product)}
-                  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-                >
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      
-      {filteredProducts.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-gray-600 dark:text-gray-300 text-lg">No products found in this category.</p>
+          {categories.map(category => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`rounded-full border px-4 py-2 text-sm font-medium transition-all ${
+                selectedCategory === category
+                  ? 'bg-coffee-500 text-white shadow-lg shadow-coffee-500/30'
+                  : 'border-gray-200 bg-white text-gray-600 hover:border-coffee-200 hover:text-gray-900'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
         </div>
-      )}
+
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          {filteredProducts.map(product => (
+            <article
+              key={product.id}
+              className="group flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-lg transition-transform hover:-translate-y-1 hover:shadow-2xl"
+            >
+              <Link to={`/products/${product.id}`} className="relative block">
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <span className="absolute left-4 top-4 rounded-full bg-black/60 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-white">
+                  {product.category}
+                </span>
+              </Link>
+
+              <div className="flex flex-1 flex-col gap-4 px-6 pb-6 pt-5">
+                <div className="space-y-2">
+                  <Link to={`/products/${product.id}`} className="inline-block text-lg font-semibold text-gray-900 transition-colors hover:text-coffee-600">
+                    {product.name}
+                  </Link>
+                  <p className="text-sm leading-relaxed text-gray-600 line-clamp-3">
+                    {product.description}
+                  </p>
+                </div>
+
+                <div className="mt-auto">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-xl font-bold text-coffee-600">{formatARS(product.price)}</span>
+                      <span className="text-xs uppercase tracking-widest text-gray-500">Cuarto</span>
+                    </div>
+                    <Link
+                      to={`/products/${product.id}`}
+                      className="inline-flex items-center justify-center rounded-full border border-coffee-500 px-4 py-2 text-sm font-medium text-coffee-600 transition-colors hover:bg-coffee-50"
+                    >
+                      Ver detalles
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {filteredProducts.length === 0 && (
+          <div className="rounded-2xl border border-gray-200 bg-white px-8 py-16 text-center text-gray-600">
+            No encontramos cafés con esos filtros. Probá limpiarlos o explorá otra categoría.
+          </div>
+        )}
+      </div>
     </div>
   );
 };
