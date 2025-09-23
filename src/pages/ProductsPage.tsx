@@ -46,10 +46,10 @@ const ProductsPage = () => {
   return (
     <div className="w-full space-y-12">
       <PageBanner
-        title="Catálogo Kaapeh"
-        description="Cada cuarto de kilo se tuesta bajo pedido para que disfrutes el perfil más fresco de nuestros cafés de especialidad."
-        backgroundImage="https://zsucsanecavdmpnpatct.supabase.co/storage/v1/object/sign/e-commerces/kaapeh/27.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV83YTVkNTQ5Yi1jNjE5LTQxNzgtYjFiNy1jY2FkMjBlMTlhOTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJlLWNvbW1lcmNlcy9rYWFwZWgvMjcuanBnIiwiaWF0IjoxNzU4MzE3NDg1LCJleHAiOjE3ODk4NTM0ODV9.Ax1trhQJEQUx-_a7aGfySRRolLd_FfbKLEMYG2biuxY"
-        cta={{ label: 'Explorar Métodos', to: '/brewing' }}
+        title="Catálogo EcoSales"
+        description="Productos sostenibles seleccionados cuidadosamente de empresas comprometidas con el medio ambiente y la responsabilidad social."
+        backgroundImage="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=1600&auto=format&fit=crop"
+        cta={{ label: 'Ver Impacto Ambiental', to: '/huella' }}
       />
 
       <div className="w-full space-y-10 px-6 md:px-12 pb-16">
@@ -57,7 +57,7 @@ const ProductsPage = () => {
           <div className="space-y-2 max-w-2xl">
             <h1 className="text-3xl font-bold text-gray-900">Todos los Productos</h1>
             <p className="text-gray-600 text-sm md:text-base">
-              Filtrá por categoría, buscá tu perfil favorito o descubrí nuevas ediciones. Encontramos {resultCount} cafés listos para vos.
+              Filtrá por categoría, buscá productos sostenibles o descubrí nuevas opciones ecológicas. Encontramos {resultCount} productos responsables para vos.
             </p>
           </div>
 
@@ -66,7 +66,7 @@ const ProductsPage = () => {
               <FaSearch className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400" />
               <input
                 type="search"
-                placeholder="Buscar por nombre o notas de cata"
+                placeholder="Buscar productos sostenibles"
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
                 className="w-full rounded-full border border-gray-200 bg-white px-10 py-2 text-sm text-gray-800 shadow-sm focus:border-coffee-400 focus:outline-none focus:ring-2 focus:ring-coffee-300"
@@ -165,7 +165,7 @@ const ProductsPage = () => {
 
         {filteredProducts.length === 0 && (
           <div className="rounded-2xl border border-gray-200 bg-white px-8 py-16 text-center text-gray-600">
-            No encontramos cafés con esos filtros. Probá limpiarlos o explorá otra categoría.
+            No encontramos productos sostenibles con esos filtros. Probá limpiarlos o explorá otra categoría.
           </div>
         )}
       </div>

@@ -1,13 +1,13 @@
 import type { Product } from '../types';
 import { formatARS } from './currency';
 
-// Número de WhatsApp de Kaapeh (reemplazar con el número real)
+// Número de WhatsApp de EcoSales (reemplazar con el número real)
 const WHATSAPP_NUMBER = '5493513919014'; // Formato: código país + número sin espacios ni símbolos
 
 export const generateWhatsAppMessage = (product: Product, quantity: number = 1) => {
   const totalPrice = product.price * quantity;
   
-  const message = `¡Hola! 👋 Me interesa comprar café de Kaapeh:
+  const message = `¡Hola! 👋 Me interesa comprar en EcoSales:
 
 🔸 *Producto:* ${product.name}
 🔸 *Categoría:* ${product.category}

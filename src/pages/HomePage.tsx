@@ -4,11 +4,48 @@ import { FaCoffee, FaLeaf, FaGlobeAmericas, FaMugHot } from 'react-icons/fa';
 import { FEATURED_PRODUCTS, COFFEE_ORIGINS, BREWING_METHODS } from '../lib/data';
 import { formatARS } from '../lib/currency';
 import { useScrollToTop } from '../hooks/useScrollToTop';
+import CircularGallery from '../components/ui/CircularGallery';
 import type { Product, CoffeeOrigin, BrewingMethod } from '../types';
 
 const HomePage = () => {
   // Scroll to top on page load
   useScrollToTop();
+
+  // Tiendas que confían en EcoSales
+  const trustedStores = [
+    { 
+      image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=800&auto=format&fit=crop',
+      text: 'Verde Natural'
+    },
+    { 
+      image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800&auto=format&fit=crop',
+      text: 'Eco Textiles'
+    },
+    { 
+      image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=800&auto=format&fit=crop',
+      text: 'Hogar Verde'
+    },
+    { 
+      image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=800&auto=format&fit=crop',
+      text: 'Orgánico Plus'
+    },
+    { 
+      image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop',
+      text: 'Moda Consciente'
+    },
+    { 
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop',
+      text: 'Bio Market'
+    },
+    { 
+      image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=800&auto=format&fit=crop',
+      text: 'Sustentable Co'
+    },
+    { 
+      image: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=800&auto=format&fit=crop',
+      text: 'Planeta Verde'
+    }
+  ];
 
   // Animations
   const fadeIn = {
@@ -34,10 +71,20 @@ const HomePage = () => {
     <div className="space-y-16">
       {/* Hero Section */}
       <section className="relative overflow-hidden min-h-screen flex items-center justify-center">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ 
-          backgroundImage: "url('https://zsucsanecavdmpnpatct.supabase.co/storage/v1/object/sign/e-commerces/kaapeh/29.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV83YTVkNTQ5Yi1jNjE5LTQxNzgtYjFiNy1jY2FkMjBlMTlhOTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJlLWNvbW1lcmNlcy9rYWFwZWgvMjkuanBnIiwiaWF0IjoxNzU4MzE3NDI2LCJleHAiOjE3ODk4NTM0MjZ9.AVwkJYMBu1ED3YEfBaE55co5oclvthRtwDXQocnVUAY')",
-          filter: 'brightness(0.6)'
-        }}></div>
+        {/* Video Background */}
+        <video 
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          style={{ filter: 'brightness(0.6)' }}
+        >
+          <source src="https://zsucsanecavdmpnpatct.supabase.co/storage/v1/object/public/ecosale/video.mp4" type="video/mp4" />
+        </video>
+        
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/30"></div>
         
         <div className="relative px-8 md:px-12 z-10 w-full">
           <motion.div 
@@ -46,8 +93,8 @@ const HomePage = () => {
             animate="visible"
             variants={fadeIn}
           >
-            <h1 className="font-serif text-4xl md:text-6xl font-bold mb-6">Descubre el Arte del Café</h1>
-            <p className="text-xl md:text-2xl mb-8 text-gray-100">Granos de especialidad seleccionados a mano de los mejores productores del mundo</p>
+            <h1 className="font-serif text-4xl md:text-6xl font-bold mb-6">Marketplace Sostenible</h1>
+            <p className="text-xl md:text-2xl mb-8 text-gray-100">Productos ecológicos y empresas responsables que cuidan el planeta</p>
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -56,7 +103,7 @@ const HomePage = () => {
                 to="/products" 
                 className="inline-block bg-turquoise-500 text-white font-medium px-8 py-4 rounded-lg border-2 border-turquoise-400 hover:bg-turquoise-600 hover:border-turquoise-300 transition-all duration-300"
               >
-                Explorar Cafés
+                Explorar Productos
               </Link>
             </motion.div>
           </motion.div>
@@ -77,13 +124,13 @@ const HomePage = () => {
               className="font-serif text-3xl font-bold text-coffee-800 mb-4"
               variants={fadeIn}
             >
-              Por qué elegir Kaapeh
+              Por qué elegir EcoSales
             </motion.h2>
             <motion.p 
               className="text-coffee-600 max-w-2xl mx-auto"
               variants={fadeIn}
             >
-              Nos apasiona el café de especialidad y cada detalle del proceso, desde el cultivo hasta tu taza
+              Nos apasiona la sostenibilidad y conectamos consumidores con productos y empresas que cuidan el medio ambiente
             </motion.p>
           </div>
           
@@ -95,8 +142,8 @@ const HomePage = () => {
               <div className="text-turquoise-500 text-3xl mb-4 flex justify-center">
                 <FaCoffee />
               </div>
-              <h3 className="text-xl font-semibold text-coffee-800 mb-2">Calidad Superior</h3>
-              <p className="text-coffee-600">Solo seleccionamos el 1% de los mejores granos de café del mundo</p>
+              <h3 className="text-xl font-semibold text-coffee-800 mb-2">Productos Verificados</h3>
+              <p className="text-coffee-600">Solo productos con certificaciones ecológicas y de impacto positivo</p>
             </motion.div>
             
             <motion.div 
@@ -107,7 +154,7 @@ const HomePage = () => {
                 <FaLeaf />
               </div>
               <h3 className="text-xl font-semibold text-coffee-800 mb-2">Sostenibilidad</h3>
-              <p className="text-coffee-600">Trabajamos directamente con productores que practican agricultura sostenible</p>
+              <p className="text-coffee-600">Trabajamos con empresas B Corp y organizaciones comprometidas con el planeta</p>
             </motion.div>
             
             <motion.div 
@@ -118,7 +165,7 @@ const HomePage = () => {
                 <FaGlobeAmericas />
               </div>
               <h3 className="text-xl font-semibold text-coffee-800 mb-2">Comercio Justo</h3>
-              <p className="text-coffee-600">Pagamos precios justos que superan los estándares del mercado</p>
+              <p className="text-coffee-600">Promovemos el comercio justo y la economía circular</p>
             </motion.div>
             
             <motion.div 
@@ -128,8 +175,8 @@ const HomePage = () => {
               <div className="text-turquoise-500 text-3xl mb-4 flex justify-center">
                 <FaMugHot />
               </div>
-              <h3 className="text-xl font-semibold text-coffee-800 mb-2">Tostado Artesanal</h3>
-              <p className="text-coffee-600">Tostamos en pequeños lotes para garantizar frescura y sabor óptimos</p>
+              <h3 className="text-xl font-semibold text-coffee-800 mb-2">Impacto Medible</h3>
+              <p className="text-coffee-600">Cada compra genera un impacto positivo medible en el medio ambiente</p>
             </motion.div>
           </div>
         </motion.div>
@@ -149,7 +196,7 @@ const HomePage = () => {
               className="font-serif text-3xl font-bold text-coffee-800"
               variants={fadeIn}
             >
-              Cafés Destacados
+              Productos Destacados
             </motion.h2>
             <motion.div variants={fadeIn}>
               <Link 
@@ -222,9 +269,9 @@ const HomePage = () => {
           variants={staggerContainer}
         >
           <motion.div className="text-center mb-16" variants={fadeIn}>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">Orígenes del Café</h2>
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-white mb-6">Nuestro Impacto</h2>
             <p className="text-gray-200 text-lg max-w-3xl mx-auto leading-relaxed">
-              Exploramos el mundo para traerte los mejores granos de café de regiones reconocidas por su excelencia
+              Conectamos productos sostenibles con consumidores conscientes para crear un impacto positivo en el planeta
             </p>
           </motion.div>
           
@@ -243,6 +290,56 @@ const HomePage = () => {
           </div>
         </motion.div>
       </section>
+
+      {/* Trusted Stores Section */}
+      <section className="py-20 bg-gradient-to-br from-primary-50 via-neutral-50 to-green-50 relative overflow-hidden">
+        <motion.div 
+          className="max-w-6xl mx-auto px-4 md:px-12"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+        >
+          <motion.div className="text-center mb-16" variants={fadeIn}>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-espresso mb-6">
+              Tiendas que Confían en EcoSales
+            </h2>
+            <p className="text-espresso/70 text-lg max-w-3xl mx-auto leading-relaxed">
+              Más de 150 tiendas sostenibles ya forman parte de nuestra comunidad, 
+              creando un impacto positivo y conectando con consumidores conscientes
+            </p>
+          </motion.div>
+
+          <div className="h-96 w-full">
+            <CircularGallery
+              items={trustedStores}
+              bend={2}
+              textColor="#231b18"
+              borderRadius={0.08}
+              font="bold 24px Inter"
+              scrollSpeed={1.5}
+              scrollEase={0.08}
+            />
+          </div>
+
+          <motion.div className="text-center mt-12" variants={fadeIn}>
+            <p className="text-espresso/60 mb-6">
+              ¿Tu tienda también quiere ser parte del cambio?
+            </p>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link 
+                to="/comunidad" 
+                className="inline-block bg-primary text-white font-semibold px-8 py-4 rounded-full hover:bg-primary/90 transition-colors shadow-lg"
+              >
+                Únete a la Comunidad
+              </Link>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </section>
       
       {/* Brewing Methods */}
       <section className="py-16 bg-neutral-50">
@@ -254,8 +351,8 @@ const HomePage = () => {
           variants={staggerContainer}
         >
           <motion.div className="text-center mb-12" variants={fadeIn}>
-            <h2 className="font-serif text-3xl font-bold text-coffee-800 mb-4">Métodos de Preparación</h2>
-            <p className="text-coffee-600 max-w-2xl mx-auto">Cada método de preparación resalta diferentes características del café. Descubre cuál es tu favorito</p>
+            <h2 className="font-serif text-3xl font-bold text-coffee-800 mb-4">Categorías Sostenibles</h2>
+            <p className="text-coffee-600 max-w-2xl mx-auto">Explora nuestras categorías de productos ecológicos y empresas responsables</p>
           </motion.div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">

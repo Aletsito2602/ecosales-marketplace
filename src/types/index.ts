@@ -12,6 +12,16 @@ export interface Product {
     acidity: string;
     finish: string;
   };
+  carbonFootprintSaved?: number; // kg de CO2 ahorrados
+  shippingOptions?: ShippingOption[];
+}
+
+export interface ShippingOption {
+  company: string;
+  isBCorp: boolean;
+  deliveryTime: string;
+  cost: number;
+  description: string;
 }
 
 export interface CartItem {

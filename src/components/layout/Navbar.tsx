@@ -6,16 +6,17 @@ const Navbar = () => {
   const location = useLocation();
 
   const navItems = [
-    { label: 'Inicio', href: '/' },
-    { label: 'Cafés', href: '/products' },
-    { label: 'Métodos', href: '/brewing' },
+    { label: 'Home', href: '/' },
+    { label: 'Tienda', href: '/tienda' },
+    { label: 'Comunidad', href: '/comunidad' },
     { label: 'Nosotros', href: '/about' },
+    { label: 'Huella', href: '/huella' },
   ];
 
   return (
     <PillNav
       logo="/logo%20kaapeh.jpg"
-      logoAlt="Kaapeh"
+      logoAlt="EcoSales"
       items={navItems}
       activeHref={location.pathname}
       baseColor="#00afac"

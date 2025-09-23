@@ -136,6 +136,65 @@ const ProductDetailPage = () => {
                 </div>
               )}
 
+              {/* Carbon Footprint */}
+              {product.carbonFootprintSaved && (
+                <div className="bg-green-50 rounded-xl p-6 border border-green-200 shadow-sm">
+                  <h3 className="text-xl font-bold text-green-800 mb-4 flex items-center gap-2">
+                    <span className="text-2xl">🌱</span>
+                    Impacto Ambiental
+                  </h3>
+                  <div className="flex items-center gap-4">
+                    <div className="bg-green-100 rounded-full p-4">
+                      <span className="text-3xl">♻️</span>
+                    </div>
+                    <div>
+                      <p className="text-green-700 font-semibold text-lg">
+                        {product.carbonFootprintSaved} kg CO₂ ahorrados
+                      </p>
+                      <p className="text-green-600 text-sm">
+                        Al elegir nuestro café sostenible contribuís al cuidado del planeta
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Shipping Options */}
+              {product.shippingOptions && (
+                <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
+                  <h3 className="text-xl font-bold text-coffee-800 mb-6 flex items-center gap-2">
+                    <span className="text-2xl">📦</span>
+                    Opciones de Envío
+                  </h3>
+                  <div className="space-y-4">
+                    {product.shippingOptions.map((option, index) => (
+                      <div key={index} className="border border-gray-200 rounded-lg p-4 hover:border-turquoise-300 transition-colors">
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-3">
+                            <h4 className="font-semibold text-coffee-800">{option.company}</h4>
+                            {option.isBCorp && (
+                              <span className="bg-turquoise-100 text-turquoise-800 px-2 py-1 rounded-full text-xs font-medium">
+                                B Corp ✓
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-right">
+                            <p className="font-bold text-coffee-800">{formatARS(option.cost)}</p>
+                            <p className="text-sm text-coffee-600">{option.deliveryTime}</p>
+                          </div>
+                        </div>
+                        <p className="text-coffee-600 text-sm">{option.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-4 p-3 bg-turquoise-50 rounded-lg border border-turquoise-200">
+                    <p className="text-sm text-turquoise-700">
+                      <strong>💡 Tip:</strong> Las empresas B Corp están certificadas por su compromiso con el impacto social y ambiental positivo.
+                    </p>
+                  </div>
+                </div>
+              )}
+
               {/* Quantity Selector */}
               <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
                 <h3 className="text-lg font-semibold text-coffee-800 mb-4">Cantidad</h3>
