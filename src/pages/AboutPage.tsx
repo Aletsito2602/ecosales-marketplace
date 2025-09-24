@@ -6,7 +6,7 @@ const AboutPage = () => {
   // Scroll to top on page load
   useScrollToTop();
 
-  const kaapehImages = [
+  const ecosalesImages = [
     {
       src: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1000&auto=format&fit=crop',
       alt: 'Granos de café de especialidad'
@@ -33,7 +33,7 @@ const AboutPage = () => {
     },
     {
       src: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1000&auto=format&fit=crop',
-      alt: 'Equipo Kaapeh'
+      alt: 'Equipo EcoSales'
     },
     {
       src: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=80&w=1000&auto=format&fit=crop',
@@ -54,7 +54,7 @@ const AboutPage = () => {
       {/* Hero Section with DomeGallery - Full Width & Animated */}
       <div className="absolute inset-0 w-full h-full">
         <DomeGallery
-          images={kaapehImages}
+          images={ecosalesImages}
           fit={0.8}
           overlayBlurColor="#231b18"
           grayscale={false}

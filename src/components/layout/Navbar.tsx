@@ -15,7 +15,7 @@ const Navbar = () => {
 
   return (
     <PillNav
-      logo="/logo%20kaapeh.jpg"
+      logo="/ecosaleslogo.png"
       logoAlt="EcoSales"
       items={navItems}
       activeHref={location.pathname}

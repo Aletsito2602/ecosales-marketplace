@@ -292,15 +292,15 @@ const HomePage = () => {
       </section>
 
       {/* Trusted Stores Section */}
-      <section className="py-20 bg-gradient-to-br from-primary-50 via-neutral-50 to-green-50 relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-primary-50 via-neutral-50 to-green-50 relative overflow-hidden w-full">
         <motion.div 
-          className="max-w-6xl mx-auto px-4 md:px-12"
+          className="w-full px-0"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
         >
-          <motion.div className="text-center mb-16" variants={fadeIn}>
+          <motion.div className="text-center mb-16 px-4 md:px-12" variants={fadeIn}>
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-espresso mb-6">
               Tiendas que Confían en EcoSales
             </h2>
@@ -322,7 +322,7 @@ const HomePage = () => {
             />
           </div>
 
-          <motion.div className="text-center mt-12" variants={fadeIn}>
+          <motion.div className="text-center mt-12 px-4 md:px-12" variants={fadeIn}>
             <p className="text-espresso/60 mb-6">
               ¿Tu tienda también quiere ser parte del cambio?
             </p>

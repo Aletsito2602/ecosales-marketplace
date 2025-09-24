@@ -57,7 +57,7 @@ export const PRODUCTS: Product[] = [
     price: 24100,
     image: 'https://zsucsanecavdmpnpatct.supabase.co/storage/v1/object/sign/e-commerces/kaapeh/6.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV83YTVkNTQ5Yi1jNjE5LTQxNzgtYjFiNy1jY2FkMjBlMTlhOTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJlLWNvbW1lcmNlcy9rYWFwZWgvNi5qcGciLCJpYXQiOjE3NTgzMTc2ODksImV4cCI6MTc4OTg1MzY4OX0.4aPCaAC1n2MwmGXwxAKqRp2uEImJsmeys9BOSS_h5Vw',
     description:
-      'Colombia – Versátil y vibrante. En Kaapeh tostamos este café de Colombia con una técnica de omni tueste, pensada para que brille tanto en espresso como en filtrado. En taza revela una acidez media-alta y brillante, sostenida por un cuerpo medio y sedoso que lo vuelve sumamente placentero. Su dulzor equilibrado, cercano a frutas maduras y azúcar suave, lo hace expresivo y versátil, capaz de adaptarse a cada preparación sin perder su identidad.',
+      'Colombia – Versátil y vibrante. Este café de Colombia se procesa con técnicas sostenibles, pensado para brillar tanto en espresso como en filtrado. En taza revela una acidez media-alta y brillante, sostenida por un cuerpo medio y sedoso que lo vuelve sumamente placentero. Su dulzor equilibrado, cercano a frutas maduras y azúcar suave, lo hace expresivo y versátil, perfecto para el consumidor consciente.',
     category: 'Cafés de Origen',
     tastingNotes: {
       aroma: ['Frutas maduras', 'Azúcar suave', 'Floral'],
@@ -75,7 +75,7 @@ export const PRODUCTS: Product[] = [
     price: 24100,
     image: 'https://zsucsanecavdmpnpatct.supabase.co/storage/v1/object/sign/e-commerces/kaapeh/21.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV83YTVkNTQ5Yi1jNjE5LTQxNzgtYjFiNy1jY2FkMjBlMTlhOTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJlLWNvbW1lcmNlcy9rYWFwZWgvMjEuanBnIiwiaWF0IjoxNzU4MzE3ODQ1LCJleHAiOjE3ODk4NTM4NDV9.h5R4wf__RLH7YAAEnAG6FsydNgEuNHBTAvkzlF5eQfY',
     description:
-      'Bolivia – Elegancia en cada sorbo. Kaapeh selecciona este café boliviano por su pureza y delicadeza natural. Lo tostamos para resaltar una acidez brillante pero amable, sostenida por un cuerpo medio y jugoso que llena la boca de frescura. Su dulzor refinado, como miel clara y frutas frescas, lo convierte en una taza limpia, equilibrada y profundamente elegante que se disfruta tanto en espresso como en filtrado.',
+      'Bolivia – Elegancia en cada sorbo. EcoSales selecciona este café boliviano por su pureza y delicadeza natural. Procesado de manera sostenible para resaltar una acidez brillante pero amable, sostenida por un cuerpo medio y jugoso que llena la boca de frescura. Su dulzor refinado, como miel clara y frutas frescas, lo convierte en una taza limpia, equilibrada y profundamente elegante.',
     category: 'Cafés de Origen',
     carbonFootprintSaved: 3.1,
     shippingOptions: SHIPPING_OPTIONS
@@ -92,7 +92,7 @@ export const PRODUCTS: Product[] = [
     shippingOptions: SHIPPING_OPTIONS
   },
   {
-    id: 'blend-kaapeh',
+    id: 'blend-ecosales',
     name: 'BLEND ECOSALES',
     price: 23000,
     image: 'https://zsucsanecavdmpnpatct.supabase.co/storage/v1/object/sign/e-commerces/kaapeh/28.jpg?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV83YTVkNTQ5Yi1jNjE5LTQxNzgtYjFiNy1jY2FkMjBlMTlhOTQiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJlLWNvbW1lcmNlcy9rYWFwZWgvMjguanBnIiwiaWF0IjoxNzU4NDk1NjQxLCJleHAiOjE3OTAwMzE2NDF9.Ef9ztSIOCrz1xYtUUaQ9d78lwi2uJYV4nxKuPNHNVlE',
